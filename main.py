@@ -119,13 +119,6 @@ def main():
         avg_triton, avg_serial = test_grid_size(size, noise_scale, iterations)
         print("{:<8} {:<20.4f} {:<20.4f}".format(size, avg_triton, avg_serial))
 
-    # Generate final terrain mesh using the Triton version from the largest grid.
-    final_size = grid_sizes[-1]
-    print("\nGenerating terrain mesh for grid size {}x{}...".format(
-        final_size, final_size))
-    noise_grid = compute(final_size, final_size, noise_scale)
-    save_to_png(noise_grid, "name")
-
 
 if __name__ == '__main__':
     main()
