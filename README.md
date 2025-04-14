@@ -1,11 +1,11 @@
 # Perlin Terrain Generator with Triton
 
-This project uses Triton to compute a height map with a single-layer Perlin noise kernel running on the GPU. The generated noise grid is then used to build a 3D mesh. Each vertex is colored based on height—low vertices appear green and high vertices appear red—and the mesh is exported as a Wavefront OBJ file.
+This project uses Triton to compute a height map with a single-layer Perlin noise kernel running on the GPU.
 
 ## File Structure
 
-- **main.py:** Main driver script that computes the noise grid, generates the mesh, and exports the OBJ file.
-- **perlin_triton.py:** Contains the Triton kernel and a helper function to generate the noise grid.
+- **main.py:** Main driver script that computes the noise grid.
+- **perlin_gpu.py:** Contains the Triton kernel and a helper function to generate the noise grid.
 - **requirements.txt:** Required Python packages.
 - **README.md:** This file.
 
