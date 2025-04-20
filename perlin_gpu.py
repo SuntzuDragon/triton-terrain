@@ -1,5 +1,3 @@
-import random
-from matplotlib import pyplot as plt
 import torch
 import triton
 import triton.language as tl
@@ -67,8 +65,8 @@ def perlin(output, perm, scale, width, height, BLOCK_SIZE: tl.constexpr):
     tl.store(output + idx, result, mask=mask)
 
 
-def compute(width, height, scale):
-    random.seed(42)
+def compute_noise_grid_parallel(width, height, scale):
+    torch.manual_seed(42)
     perm = torch.randperm(256, device='cuda')
     perm = torch.cat((perm, perm))
 
