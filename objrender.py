@@ -1,7 +1,6 @@
 import trimesh
 import numpy as np
 from trimesh.transformations import rotation_matrix
-from trimesh.visual.color import interpolate
 from pyglet import gl
 
 
@@ -10,7 +9,7 @@ scene = trimesh.load('bobj-octave23.obj', force='scene')
 scene.apply_transform(rotation_matrix(-np.pi/2, [1, 0, 0]))
 mesh = next(iter(scene.geometry.values()))
 
-# height→colour
+# height -> colour
 zs = mesh.vertices[:, 2]
 z_norm = (zs - zs.min()) / np.ptp(zs)
 
@@ -37,12 +36,12 @@ def gl_setup(_):
     gl.glClearColor(0.53, 0.81, 0.92, 1.0)  # light sky‑blue
 
 
-center   = mesh.centroid
-radius   = mesh.extents.max()
-angle    = np.radians(-35)    
+center = mesh.centroid
+radius = mesh.extents.max()
+angle = np.radians(-35)
 
 scene.set_camera(
-    angles=(angle, 0, 0),   # rotate around X by +45°
+    angles=(angle, 0, 0),   # rotate around X by +45
     center=center,          # look at mesh center
     distance=radius         # back up far enough to see it all
 )

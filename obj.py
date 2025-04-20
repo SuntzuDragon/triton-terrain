@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def to_obj(array: np.ndarray):
+def save_to_obj(array: np.ndarray):
     obj_verts = ''
     obj_faces = ''
 
