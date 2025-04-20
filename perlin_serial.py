@@ -47,17 +47,36 @@ def perlin_serial(x, y, perm):
     return lerp_serial(x1, x2, v)
 
 
-def compute_noise_grid_serial(width, height, scale):
+def compute_noise_grid_serial(width, height, scale=85.0):
     random.seed(42)
     perm = list(range(256))  # [0, 1, .. 255]
     random.shuffle(perm)
     # duplicate the permutation table (first half == second half, doubled in length)
     perm = perm + perm
+    OCTAVES = 4
 
     noise_grid = np.empty((height, width), dtype=np.float32)
     for j in range(height):
         for i in range(width):
-            x = i / scale
-            y = j / scale
-            noise_grid[j, i] = perlin_serial(x, y, perm)
+            octave_result = 0.0
+            amplitude = 1.0
+            frequency = 1.0
+            norm = 0.0
+            for o in range(OCTAVES):
+                x = i / scale
+                y = j / scale
+                result = perlin_serial(x*frequency, y*frequency, perm)
+
+                octave_result += result * amplitude
+                norm += amplitude
+                amplitude *= 0.4  # persistance
+                frequency *= 2  # lacunarity
+
+            octave_result = octave_result / norm
+
+            octave_result = (octave_result + 1) / 2
+            octave_result *= octave_result * octave_result
+            octave_result *= 100
+            noise_grid[j, i] = octave_result
+
     return noise_grid

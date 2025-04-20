@@ -85,7 +85,7 @@ def perlin(output, perm, scale, width, height, BLOCK_SIZE: tl.constexpr):
     tl.store(output + idx, octave_result, mask=mask)
 
 
-def compute_noise_grid_parallel(width, height, scale):
+def compute_noise_grid_parallel(width, height, scale=85.0):
     torch.manual_seed(42)
     perm = torch.randperm(256, device='cuda')
     perm = torch.cat((perm, perm))

@@ -61,12 +61,20 @@ def main():
     # for size in grid_sizes:
     #     avg_triton, avg_serial = test_grid_size(size, noise_scale, iterations)
     #     print("{:<8} {:<20.4f} {:<20.4f}".format(size, avg_triton, avg_serial))
-    resolution = 1024
+    resolution = 256
     noise_grid = compute_noise_grid_parallel(resolution, resolution, 85.0)
-    attempt = 23
+    attempt = 24
+
     save_to_png(noise_grid, f'octaves-attempt{attempt}')
     obj = to_obj(noise_grid)
     with open(f'bobj-octave{attempt}.obj', 'w') as f:
+        f.write(obj)
+    
+    resolution = 256
+    noise_grid = compute_noise_grid_serial(resolution, resolution, 85.0)
+    save_to_png(noise_grid, f'octaves-attempt-serial{attempt}')
+    obj = to_obj(noise_grid)
+    with open(f'bobj-octave-serial{attempt}.obj', 'w') as f:
         f.write(obj)
 
 
