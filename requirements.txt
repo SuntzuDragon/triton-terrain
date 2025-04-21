@@ -1,6 +1,7 @@
+fire==0.7.0
 matplotlib==3.10.1
 numpy==2.2.5
-pyglet==1.5.31
+pyglet==2.1.4
 torch==2.6.0
 trimesh==4.6.8
-triton==3.2.0
+triton==3.3.0
