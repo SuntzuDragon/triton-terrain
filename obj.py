@@ -1,26 +1,25 @@
 import numpy as np
 
 
-def save_to_obj(array: np.ndarray):
-    obj_verts = ''
-    obj_faces = ''
-
+def save_to_obj(array: np.ndarray) -> str:
     height, width = array.shape
 
-    for y in range(height - 1):
-        for x in range(width - 1):
-            obj_verts += f'v {x} {y} {array[y, x]}\n'
+    # Generate all vertex lines
+    verts = [f'v {x} {y} {array[y, x]}'
+             for y in range(height)
+             for x in range(width)]
 
-            v00 = (y * width + x) + 1
+    faces = []
+    # Calculate width for indexing
+    for y in range(height - 1):
+        row_offset = y * width
+        for x in range(width - 1):
+            v00 = row_offset + x + 1
             v01 = v00 + width
             v10 = v00 + 1
-            v11 = v00 + width + 1
+            v11 = v01 + 1
+            faces.append(f'f {v00} {v01} {v10}')
+            faces.append(f'f {v01} {v11} {v10}')
 
-            obj_faces += f'f {v00} {v01} {v10}\n'
-            obj_faces += f'f {v01} {v11} {v10}\n'
-        obj_verts += f'v {x+1} {y} {array[y, x+1]}\n'
-
-    for x in range(width):
-        obj_verts += f'v {x} {height-1} {array[height-1, x]}\n'
-
-    return obj_verts + '\n' + obj_faces
+    # Join into single string
+    return "\n".join(verts + faces) + "\n"
