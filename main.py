@@ -1,7 +1,6 @@
 import time
 import torch
 import fire
-import os
 from perlin_gpu import compute_noise_grid_parallel
 from perlin_serial import compute_noise_grid_serial
 from obj import save_to_obj
@@ -50,14 +49,9 @@ class Terrain(object):
             f.write(obj)
         render(objfilename=filename)
 
-    def png(self, size, scale, filename='terrain.png'):
+    def png(self, size=1024, scale=85.0, filename='terrain.png'):
         noise_grid = compute_noise_grid_parallel(size, size, scale)
-        png = save_to_png(noise_grid, filename)
-        if filename.endswith('.png'):
-            filename = filename + '.png'
-        with open(filename, 'w') as f:
-            f.write(png)
-        os.startfile(filename)
+        save_to_png(noise_grid, filename)
 
     def view(self, filename='terrain.png'):
         render(objfilename=filename)
