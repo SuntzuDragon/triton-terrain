@@ -25,7 +25,7 @@ The project requires the following Python libraries:
 - `pyglet==2.1.4`
 - `torch==2.6.0`
 - `trimesh==4.6.8`
-- `triton==3.3.0`
+- `triton==3.2.0`
 
 Install the dependencies using:
 
