@@ -44,7 +44,7 @@ def render(objfilename):
     angle = np.radians(-35)
 
     scene.set_camera(
-        angles=(np.radians(-25), np.radians(225), 0),   # rotate around X by +45
+        angles=(np.radians(-25), np.radians(180), 0),   # rotate around X by +45
         center=center,          # look at mesh center
         distance=radius*1.5         # back up far enough to see it all
     )
