@@ -9,6 +9,7 @@ def render(objfilename):
     scene = trimesh.load(objfilename, force='scene')
     scene.apply_transform(rotation_matrix(-np.pi/2, [1, 0, 0]))
     mesh = next(iter(scene.geometry.values()))
+    mesh.apply_translation(-mesh.centroid)
 
     # height -> colour
     zs = mesh.vertices[:, 2]
@@ -43,9 +44,9 @@ def render(objfilename):
     angle = np.radians(-35)
 
     scene.set_camera(
-        angles=(angle, 0, 0),   # rotate around X by +45
+        angles=(np.radians(-25), np.radians(225), 0),   # rotate around X by +45
         center=center,          # look at mesh center
-        distance=radius         # back up far enough to see it all
+        distance=radius*1.5         # back up far enough to see it all
     )
 
     # show at high FPS

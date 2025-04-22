@@ -53,7 +53,7 @@ class Terrain(object):
         noise_grid = compute_noise_grid_parallel(size, size, scale)
         save_to_png(noise_grid, filename)
 
-    def view(self, filename='terrain.png'):
+    def view(self, filename='terrain.obj'):
         render(objfilename=filename)
 
 
