@@ -18,8 +18,10 @@ def save_to_obj(array: np.ndarray) -> str:
             v01 = v00 + width
             v10 = v00 + 1
             v11 = v01 + 1
-            faces.append(f'f {v00} {v01} {v10}')
-            faces.append(f'f {v01} {v11} {v10}')
+            # faces.append(f'f {v00} {v01} {v10}')
+            # faces.append(f'f {v01} {v11} {v10}')
+            faces.append(f'f {v00} {v10} {v01}')
+            faces.append(f'f {v01} {v10} {v11}')
 
     # Join into single string
     return "\n".join(verts + faces) + "\n"

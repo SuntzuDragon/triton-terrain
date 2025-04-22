@@ -29,10 +29,14 @@ def render(objfilename):
     scene.camera.z_far = 10_000.0
 
     # GL setup callback: culling + sky
-
     def gl_setup(_):
         gl.glDisable(gl.GL_CULL_FACE)
-        gl.glClearColor(0.53, 0.81, 0.92, 1.0)  # light sky‑blue
+        gl.glClearColor(0.53, 0.81, 0.92, 1.0)  # sky‑blue background
+        gl.glEnable(gl.GL_LIGHTING)
+        gl.glEnable(gl.GL_LIGHT0)
+        # light coming from front‑right‑above
+        gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION,
+                     (gl.GLfloat * 4)(1.0, 1.0, 2.0, 0.0))
 
     center = mesh.centroid
     radius = mesh.extents.max()
