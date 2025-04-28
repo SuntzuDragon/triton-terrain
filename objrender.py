@@ -32,7 +32,6 @@ def render(objfilename):
     # GL setup callback: culling + sky
     def gl_setup(_):
         gl.glDisable(gl.GL_CULL_FACE)
-        gl.glClearColor(0.53, 0.81, 0.92, 1.0)  # sky‑blue background
         gl.glEnable(gl.GL_LIGHTING)
         gl.glEnable(gl.GL_LIGHT0)
         # light coming from front‑right‑above
@@ -44,7 +43,8 @@ def render(objfilename):
     angle = np.radians(-35)
 
     scene.set_camera(
-        angles=(np.radians(-25), np.radians(225), 0),   # rotate around X by +45
+        # rotate around X by +45
+        angles=(np.radians(-25), np.radians(225), 0),
         center=center,          # look at mesh center
         distance=radius*1.5         # back up far enough to see it all
     )

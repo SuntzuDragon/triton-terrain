@@ -1,6 +1,7 @@
 import time
 import torch
 import fire
+import statistics
 from perlin_gpu import compute_noise_grid_parallel
 from perlin_serial import compute_noise_grid_serial
 from obj import save_to_obj
@@ -35,10 +36,10 @@ class Terrain(object):
                     size, size, scale)
                 serial_times.append(time.time() - start)
 
-            avg_triton = sum(triton_times) / iterations
-            avg_serial = sum(serial_times) / iterations
+            median_triton = statistics.median(triton_times)
+            median_serial = statistics.median(serial_times)
             print("{:<8} {:<20.4f} {:<20.4f}".format(
-                size, avg_triton, avg_serial))
+                size, median_triton, median_serial))
 
     def obj(self, filename: str = 'terrain.obj', size=1024, scale=85.0):
         noise_grid = compute_noise_grid_parallel(size, size, scale)
